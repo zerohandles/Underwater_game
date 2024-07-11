@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -17,7 +18,7 @@ public class PlayerInputHandler : MonoBehaviour
     [SerializeField] string _ascend = "Ascend";
     [SerializeField] string _descend = "Descend";
     [SerializeField] string _shoot = "Shoot";
-    [SerializeField] string _spint = "Sprint";
+    [SerializeField] string _sprint = "Sprint";
 
     private InputAction _moveAction;
     private InputAction _lookAction;
@@ -35,11 +36,63 @@ public class PlayerInputHandler : MonoBehaviour
 
     public static PlayerInputHandler Instance { get; private set; }
 
-    private void Awake()
+    void Awake()
     {
         if (Instance == null)
         {
             Instance = this;
+            DontDestroyOnLoad(gameObject);
         }
+        else
+            Destroy(gameObject);
+
+        _moveAction = _playerControls.FindActionMap(_actionMapName).FindAction(_move);
+        _lookAction = _playerControls.FindActionMap(_actionMapName).FindAction(_look);
+        _ascendAction = _playerControls.FindActionMap(_actionMapName).FindAction(_ascend);
+        _descendAction = _playerControls.FindActionMap(_actionMapName).FindAction(_descend);
+        _shootAction = _playerControls.FindActionMap(_actionMapName).FindAction(_shoot);
+        _sprintAction = _playerControls.FindActionMap(_actionMapName).FindAction(_sprint);
+        RegisterInputActions();
+    }
+
+    private void RegisterInputActions()
+    {
+        _moveAction.performed += context => MoveInput = context.ReadValue<Vector2>();
+        _moveAction.canceled += context => MoveInput = Vector2.zero;
+
+        _lookAction.performed += context => LookInput = context.ReadValue<Vector2>();
+        _lookAction.canceled += context => LookInput = Vector2.zero;
+
+        _sprintAction.performed += context => SprintValue = context.ReadValue<float>();
+        _sprintAction.canceled += context => SprintValue = 0;
+
+        _ascendAction.performed += context => AscendValue = context.ReadValue<float>();
+        _ascendAction.canceled += context => AscendValue = 0;
+
+        _descendAction.performed += context => DescendValue = context.ReadValue<float>();
+        _descendAction.canceled += context => DescendValue = 0;
+
+        _shootAction.performed += context => ShootTriggered = true;
+        _shootAction.performed += context => ShootTriggered = false;
+    }
+
+    void OnEnable()
+    {
+        _moveAction.Enable();
+        _lookAction.Enable();
+        _ascendAction.Enable();
+        _descendAction.Enable();
+        _shootAction.Enable();
+        _sprintAction.Enable();
+    }
+
+    void OnDisable()
+    {
+        _moveAction?.Disable();
+        _lookAction?.Disable();
+        _ascendAction?.Disable();
+        _descendAction?.Disable();
+        _shootAction?.Disable();
+        _sprintAction?.Disable();
     }
 }

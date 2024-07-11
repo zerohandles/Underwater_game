@@ -43,12 +43,12 @@
                 },
                 {
                     "name": "Ascend",
-                    "type": "Button",
+                    "type": "Value",
                     "id": "c0447bdc-7dc1-42fa-b65f-d310849a5065",
-                    "expectedControlType": "Button",
+                    "expectedControlType": "Axis",
                     "processors": "",
                     "interactions": "",
-                    "initialStateCheck": false
+                    "initialStateCheck": true
                 },
                 {
                     "name": "Descend",
@@ -195,30 +195,8 @@
                 },
                 {
                     "name": "",
-                    "id": "4d15bab8-ac3b-4eb7-b7c1-29f9d3b945da",
-                    "path": "<Gamepad>/buttonSouth",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "Ascend",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
-                    "id": "63de8ddf-e761-4410-bfb0-92ed4d070f2b",
-                    "path": "<Keyboard>/space",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "Ascend",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
                     "id": "f8242786-e50b-4079-9b56-ec8b7c036ff4",
-                    "path": "<Gamepad>/buttonEast",
+                    "path": "<Gamepad>/rightTrigger",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
@@ -234,6 +212,28 @@
                     "processors": "",
                     "groups": "",
                     "action": "Descend",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "c0b800f0-f73f-4426-8769-551b484ed47e",
+                    "path": "<Gamepad>/leftTrigger",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Ascend",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "40839fa0-ca31-4f22-bbbc-0b5b75f33534",
+                    "path": "<Keyboard>/space",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Ascend",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }
