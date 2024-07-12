@@ -33,6 +33,9 @@ public class PlayerInputHandler : MonoBehaviour
     public float DescendValue { get; private set; }
     public float SprintValue { get; private set; }
     public bool ShootTriggered { get; private set; }
+    public bool IsUsingMouse { get; private set; }
+
+    private Vector2 _lastMousePosition;
 
     public static PlayerInputHandler Instance { get; private set; }
 
@@ -53,6 +56,14 @@ public class PlayerInputHandler : MonoBehaviour
         _shootAction = _playerControls.FindActionMap(_actionMapName).FindAction(_shoot);
         _sprintAction = _playerControls.FindActionMap(_actionMapName).FindAction(_sprint);
         RegisterInputActions();
+    }
+
+    private void Update()
+    {
+        if (Gamepad.current != null)
+            IsUsingMouse = false;
+        else 
+            IsUsingMouse = true;
     }
 
     private void RegisterInputActions()
