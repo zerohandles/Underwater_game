@@ -1,0 +1,11 @@
+Model Information:
+* title:	Spiral Plant
+* source:	https://sketchfab.com/3d-models/spiral-plant-428a386a35be4ae5989db57a827176d9
+* author:	gavinpgamer1 (https://sketchfab.com/gavinpgamer1)
+
+Model License:
+* license type:	CC-BY-4.0 (http://creativecommons.org/licenses/by/4.0/)
+* requirements:	Author must be credited. Commercial use is allowed.
+
+If you use this 3D model in your project be sure to copy paste this credit wherever you share it:
+This work is based on "Spiral Plant" (https://sketchfab.com/3d-models/spiral-plant-428a386a35be4ae5989db57a827176d9) by gavinpgamer1 (https://sketchfab.com/gavinpgamer1) licensed under CC-BY-4.0 (http://creativecommons.org/licenses/by/4.0/)

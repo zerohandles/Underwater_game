@@ -1,0 +1,11 @@
+Model Information:
+* title:	beach rock collection 2
+* source:	https://sketchfab.com/3d-models/beach-rock-collection-2-02e37b2120304dabbf7136e7baf2bd75
+* author:	That's Cool Jack (https://sketchfab.com/thats_cool_jack)
+
+Model License:
+* license type:	CC-BY-4.0 (http://creativecommons.org/licenses/by/4.0/)
+* requirements:	Author must be credited. Commercial use is allowed.
+
+If you use this 3D model in your project be sure to copy paste this credit wherever you share it:
+This work is based on "beach rock collection 2" (https://sketchfab.com/3d-models/beach-rock-collection-2-02e37b2120304dabbf7136e7baf2bd75) by That's Cool Jack (https://sketchfab.com/thats_cool_jack) licensed under CC-BY-4.0 (http://creativecommons.org/licenses/by/4.0/)
