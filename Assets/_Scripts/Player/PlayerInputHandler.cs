@@ -35,7 +35,6 @@ public class PlayerInputHandler : MonoBehaviour
     public bool ShootTriggered { get; private set; }
     public bool IsUsingMouse { get; private set; }
 
-    private Vector2 _lastMousePosition;
 
     public static PlayerInputHandler Instance { get; private set; }
 
