@@ -883,6 +883,7 @@ GameObject:
   - component: {fileID: 1819911463}
   - component: {fileID: 1819911462}
   - component: {fileID: 1819911461}
+  - component: {fileID: 1819911464}
   m_Layer: 0
   m_Name: CharacterController
   m_TagString: Untagged
@@ -906,7 +907,7 @@ MonoBehaviour:
   _sprintMultiplier: 2
   _ascendSpeed: 3
   _descendSpeed: 3
-  _mouseSensitivity: 2
+  _lookSensitivity: 100
   _upDownRange: 80
   _followCamera: {fileID: 330585545}
   _waterSurfaceY: 103.5
