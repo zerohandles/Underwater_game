@@ -1,5 +1,9 @@
 fileFormatVersion: 2
+<<<<<<<< HEAD:Assets/Scenes/SampleScene_Profiles/Underwater Post.asset.meta
 guid: 99a5b1796b4468e4d85f03b90046db1f
+========
+guid: a4f9b0b21cfa10140b76854ccb395dcf
+>>>>>>>> 67868a395520f6ce75f29c97ce88f36fd1c214a4:Assets/TerrainSampleAssets/Settings/FoliageDiffusionProfile.asset.meta
 NativeFormatImporter:
   externalObjects: {}
   mainObjectFileID: 11400000

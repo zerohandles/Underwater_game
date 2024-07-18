@@ -1,5 +1,9 @@
 fileFormatVersion: 2
+<<<<<<<< HEAD:Assets/TerrainSampleAssets/TerrainBrushes/Soft_Round_Brush.brush.meta
 guid: a757b66aa1cbcbe4595dd37a3729ba24
+========
+guid: 99a5b1796b4468e4d85f03b90046db1f
+>>>>>>>> 67868a395520f6ce75f29c97ce88f36fd1c214a4:Assets/Scenes/SampleScene_Profiles/Underwater Post.asset.meta
 NativeFormatImporter:
   externalObjects: {}
   mainObjectFileID: 11400000

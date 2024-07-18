@@ -1,5 +1,9 @@
 fileFormatVersion: 2
+<<<<<<<< HEAD:Assets/Import/Pocillopora_eydouxi/materials/Material_1_1.mat.meta
 guid: e35cf579abc4499468481dbba4fc4f3e
+========
+guid: cee96a2661edd1040b6f86ac79ab5fc8
+>>>>>>>> 67868a395520f6ce75f29c97ce88f36fd1c214a4:Assets/TerrainSampleAssets/TerrainBrushes/Noise_Soft_Brush.brush.meta
 NativeFormatImporter:
   externalObjects: {}
   mainObjectFileID: 2100000

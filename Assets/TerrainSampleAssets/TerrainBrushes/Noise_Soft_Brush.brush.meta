@@ -1,5 +1,9 @@
 fileFormatVersion: 2
+<<<<<<<< HEAD:Assets/TerrainSampleAssets/TerrainBrushes/Noise_Soft_Brush.brush.meta
 guid: cee96a2661edd1040b6f86ac79ab5fc8
+========
+guid: 55e64e617a8bfff4ba846574e2651eb9
+>>>>>>>> 67868a395520f6ce75f29c97ce88f36fd1c214a4:Assets/Free Stylized Skybox/CubeMap/Materials/Sky_Anime_03_Day_a.mat.meta
 NativeFormatImporter:
   externalObjects: {}
   mainObjectFileID: 0

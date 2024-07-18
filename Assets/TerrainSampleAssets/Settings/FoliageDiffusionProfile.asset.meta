@@ -1,5 +1,9 @@
 fileFormatVersion: 2
+<<<<<<<< HEAD:Assets/TerrainSampleAssets/Settings/FoliageDiffusionProfile.asset.meta
 guid: a4f9b0b21cfa10140b76854ccb395dcf
+========
+guid: a757b66aa1cbcbe4595dd37a3729ba24
+>>>>>>>> 67868a395520f6ce75f29c97ce88f36fd1c214a4:Assets/TerrainSampleAssets/TerrainBrushes/Soft_Round_Brush.brush.meta
 NativeFormatImporter:
   externalObjects: {}
   mainObjectFileID: 11400000
