@@ -13,7 +13,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField] float _descendSpeed = 3f;
 
     [Header("Look Sensitivity")]
-    [SerializeField] float _mouseSensitivity = 2f;
+    [SerializeField] float _lookSensitivity = 100f;
     [SerializeField] float _upDownRange = 80f;
 
     [Header("Character Camera")]
@@ -26,6 +26,7 @@ public class PlayerController : MonoBehaviour
     PlayerInputHandler _inputHandler;
     Vector3 _desiredMovement;
     float _verticalRotation;
+    float _horizontalRotation;
 
     void Awake()
     {
@@ -41,18 +42,19 @@ public class PlayerController : MonoBehaviour
 
     private void HandleRotation()
     {
-        float mouseXRotation = _inputHandler.LookInput.x * _mouseSensitivity;
-        transform.Rotate(0, mouseXRotation, 0);
-        
-        _verticalRotation -= _inputHandler.LookInput.y * _mouseSensitivity;
-        _verticalRotation = Mathf.Clamp(_verticalRotation, -_upDownRange, _upDownRange);
+        float mouseSensitivityMultiplier = _inputHandler.IsUsingMouse ? 0.3f : 1;
 
-        _followCamera.transform.localRotation = Quaternion.Euler(_verticalRotation, 0, 0);
+        _horizontalRotation += _inputHandler.LookInput.x * _lookSensitivity * mouseSensitivityMultiplier * Time.deltaTime;
+        _verticalRotation += _inputHandler.LookInput.y * _lookSensitivity * mouseSensitivityMultiplier * Time.deltaTime;
+        _verticalRotation = Mathf.Clamp(_verticalRotation, -_upDownRange, _upDownRange);
+        _horizontalRotation %= 360;
+        transform.localEulerAngles = new Vector3(-_verticalRotation, _horizontalRotation, 0);
     }
 
     private void HandleMovement()
     {
         float speed = _swimSpeed * (_inputHandler.SprintValue > 0 ? _sprintMultiplier : 1);
+
         float depthChange = 0;
         if (_inputHandler.AscendValue > 0)
             depthChange += _ascendSpeed;
