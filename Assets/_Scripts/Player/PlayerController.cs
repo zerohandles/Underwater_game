@@ -19,6 +19,9 @@ public class PlayerController : MonoBehaviour
     [Header("Character Camera")]
     [SerializeField] Camera _followCamera;
 
+    [Header("Underwater Movement Limits")]
+    [SerializeField] float _waterSurfaceY = 103.5f;
+
     CharacterController _characterController;
     PlayerInputHandler _inputHandler;
     Vector3 _desiredMovement;
@@ -67,5 +70,9 @@ public class PlayerController : MonoBehaviour
         _desiredMovement.z = worldDirection.z * speed;
 
         _characterController.Move(_desiredMovement * Time.deltaTime);
+
+        // Ensure player stays below the surface of the water.
+        if (transform.position.y > _waterSurfaceY)
+            transform.position = new Vector3(transform.position.x, _waterSurfaceY, transform.position.z);
     }
 }
