@@ -13,17 +13,19 @@ public class PlayerController : MonoBehaviour
     [SerializeField] float _descendSpeed = 3f;
 
     [Header("Look Sensitivity")]
-    [SerializeField] float _lookSensitivity = 100f;
+    [SerializeField] float _mouseSensitivity = 2f;
     [SerializeField] float _upDownRange = 80f;
 
     [Header("Character Camera")]
     [SerializeField] Camera _followCamera;
 
+    [Header("Underwater Movement Limits")]
+    [SerializeField] float _waterSurfaceY = 103.5f;
+
     CharacterController _characterController;
     PlayerInputHandler _inputHandler;
     Vector3 _desiredMovement;
     float _verticalRotation;
-    float _horizontalRotation;
 
     void Awake()
     {
@@ -39,19 +41,18 @@ public class PlayerController : MonoBehaviour
 
     private void HandleRotation()
     {
-        float mouseSensitivityMultiplier = _inputHandler.IsUsingMouse ? 0.3f : 1;
-
-        _horizontalRotation += _inputHandler.LookInput.x * _lookSensitivity * mouseSensitivityMultiplier * Time.deltaTime;
-        _verticalRotation += _inputHandler.LookInput.y * _lookSensitivity * mouseSensitivityMultiplier * Time.deltaTime;
+        float mouseXRotation = _inputHandler.LookInput.x * _mouseSensitivity;
+        transform.Rotate(0, mouseXRotation, 0);
+        
+        _verticalRotation -= _inputHandler.LookInput.y * _mouseSensitivity;
         _verticalRotation = Mathf.Clamp(_verticalRotation, -_upDownRange, _upDownRange);
-        _horizontalRotation %= 360;
-        transform.localEulerAngles = new Vector3(-_verticalRotation, _horizontalRotation, 0);
+
+        _followCamera.transform.localRotation = Quaternion.Euler(_verticalRotation, 0, 0);
     }
 
     private void HandleMovement()
     {
         float speed = _swimSpeed * (_inputHandler.SprintValue > 0 ? _sprintMultiplier : 1);
-        
         float depthChange = 0;
         if (_inputHandler.AscendValue > 0)
             depthChange += _ascendSpeed;
@@ -67,5 +68,9 @@ public class PlayerController : MonoBehaviour
         _desiredMovement.z = worldDirection.z * speed;
 
         _characterController.Move(_desiredMovement * Time.deltaTime);
+
+        // Ensure player stays below the surface of the water.
+        if (transform.position.y > _waterSurfaceY)
+            transform.position = new Vector3(transform.position.x, _waterSurfaceY, transform.position.z);
     }
 }
