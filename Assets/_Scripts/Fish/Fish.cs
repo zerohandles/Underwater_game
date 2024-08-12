@@ -7,24 +7,27 @@ using static UnityEngine.GraphicsBuffer;
 
 public class Fish : MonoBehaviour
 {
-    NavMeshAgent _agent;
-    [SerializeField] Transform _target;
+    public NavMeshAgent Agent {get; private set;}
+    public PlayerController Player { get; private set;}
+    public Vector3 Target {get; private set;}
+
     [SerializeField] LayerMask _groundLayer;
     [SerializeField] Collider _fishCollider;
 
 
     void Start()
     {
-        _agent = GetComponent<NavMeshAgent>();
+        Agent = GetComponent<NavMeshAgent>();
+        Player = GameObject.Find("Player").GetComponent<PlayerController>();
     }
 
     void Update()
     {
-        _agent.destination = new Vector3(_target.position.x, transform.position.y, _target.position.z);
+        Agent.destination = new Vector3(Target.x, transform.position.y, Target.z);
 
         RaycastHit hit;
         Physics.Raycast(transform.position, Vector3.down, out hit, Mathf.Infinity, _groundLayer);
-        if (Mathf.Abs(_target.position.y - transform.position.y) > 1)
+        if (Mathf.Abs(Target.y - transform.position.y) > 1)
             SetDepth(hit);
         else
             MaintainDepth(hit);
@@ -34,27 +37,27 @@ public class Fish : MonoBehaviour
     /// Move the NavMeshAgent's BassOffset towards the target's y position
     /// </summary>
     /// <param name="hit"></param>
-    private void SetDepth(RaycastHit hit)
+    public void SetDepth(RaycastHit hit)
     {
-        float direction = Mathf.Sign(_target.position.y - transform.position.y);
-        float distanceToSeaFloor = _target.transform.position.y - hit.point.y;
+        float direction = Mathf.Sign(Target.y - transform.position.y);
+        float distanceToSeaFloor = Target.y - hit.point.y;
         float minDepth = _fishCollider.bounds.size.y;
 
         // Prevent fish from swimming through the ground
-        _agent.baseOffset = distanceToSeaFloor > minDepth ? _agent.baseOffset += (direction * 0.05f) : minDepth;
+        Agent.baseOffset = distanceToSeaFloor > minDepth ? Agent.baseOffset += (direction * 0.05f) : minDepth;
     }
 
     /// <summary>
     /// Keeps the NavMeshAgent at a consistant height on unlevel terrian.
     /// </summary>
     /// <param name="hit"></param>
-    private void MaintainDepth(RaycastHit hit)
+    public void MaintainDepth(RaycastHit hit)
     {
-        float desiredDepth = _target.transform.position.y - hit.point.y;
+        float desiredDepth = Target.y - hit.point.y;
         float minDepth = _fishCollider.bounds.size.y;
 
         // Prevent fish from bobbing up and down on unlevel terrain.
-        _agent.baseOffset = desiredDepth > minDepth ? desiredDepth : minDepth;
+        Agent.baseOffset = desiredDepth > minDepth ? desiredDepth : minDepth;
     }
 
 
@@ -72,4 +75,6 @@ public class Fish : MonoBehaviour
             Gizmos.DrawLine(origin, endpoint);
         }
     }
+
+    public void SetNewTarget(Vector3 newTarget) => Target = newTarget;
 }
