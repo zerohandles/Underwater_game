@@ -4,12 +4,15 @@ using UnityEngine;
 
 public class PreyFleeState : PreyBaseState
 {
+    Fish _fishController;
+
     public override void EnterState(PreyStateManager prey)
     {
         // Set flee speed
         // Set player as target
+        _fishController = prey.FishController;
         prey.IsWandering = false;
-        prey.FishController.SetNewTarget(GenerateTarget());
+        GenerateTarget();
         Debug.Log(prey.FishController.Target);
     }
 
@@ -18,17 +21,16 @@ public class PreyFleeState : PreyBaseState
         // Do exit stuff
     }
 
-    public override Vector3 GenerateTarget()
+    public override void GenerateTarget()
     {
-        return new Vector3(767, 85, 681);
+        _fishController.SetRandomTarget();
     }
 
     public override void UpdateState(PreyStateManager prey)
     {
         if (prey.IsWandering)
             prey.SwitchStates(prey.WanderState);
-        // check if player is within flee range
-        // Move away from player if within flee range
-        // else switch to wander state
+        else if (_fishController.IsTargetReached)
+            GenerateTarget();
     }
 }

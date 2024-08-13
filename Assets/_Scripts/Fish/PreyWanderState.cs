@@ -4,31 +4,31 @@ using UnityEngine;
 
 public class PreyWanderState : PreyBaseState
 {
+    Fish _fishController;
 
     public override void EnterState(PreyStateManager prey)
     {
-        // Set wander movement speed
-        // Set a target
-        prey.FishController.SetNewTarget(GenerateTarget());
+        // Set wander movement speed?
+        _fishController = prey.FishController;
+        GenerateTarget();
         Debug.Log(prey.FishController.Target);
     }
 
     public override void ExitState(PreyStateManager prey)
     {
-        // maybe increase speed for flee state
+        // increase speed for flee state?
     }
 
-    public override Vector3 GenerateTarget()
+    public override void GenerateTarget()
     {
-        return new Vector3(447, 36, 245); 
+        _fishController.SetRandomTarget(); 
     }
 
     public override void UpdateState(PreyStateManager prey)
     {
         if (prey.IsFleeing)
             prey.SwitchStates(prey.FleeState);
-        // check if player is within range
-        // switch to flee state if player is within range
-        // otherwise move towards target
+        else if (_fishController.IsTargetReached)
+            GenerateTarget();
     }
 }

@@ -4,9 +4,11 @@ using UnityEngine;
 
 public class PredatorWanderState : PredatorBaseState
 {
+    Fish _fishController;
     public override void EnterState(PredatorStateMachine predator)
     {
-        predator.FishController.SetNewTarget(GenerateTarget());
+        _fishController = predator.FishController;
+        _fishController.SetRandomTarget();
         Debug.Log("Entering Wander State");
     }
 
@@ -15,15 +17,16 @@ public class PredatorWanderState : PredatorBaseState
         Debug.Log("Exiting Wander State");
     }
 
-    public override Vector3 GenerateTarget()
+    public override void GenerateTarget()
     {
-        // TODO: Add code the generate a random location
-        return new Vector3(700, 75, 450);
+        _fishController.SetRandomTarget();
     }
 
     public override void UpdateState(PredatorStateMachine predator)
     {
         if (predator.IsChasing)
             predator.SwitchStates(predator.ChaseState);
+        else if (_fishController.IsTargetReached)
+            GenerateTarget();
     }
 }

@@ -8,9 +8,11 @@ public class PredatorAttackState : PredatorBaseState
     float _attackTimer;
     float _targetTimer;
     Transform _player;
+    Fish _fishController;
 
     public override void EnterState(PredatorStateMachine predator)
     {
+        _fishController = predator.FishController;
         _attackTimer = 0;
         _player = predator.FishController.Player.transform;
         Debug.Log("Entering Attack State");
@@ -22,10 +24,10 @@ public class PredatorAttackState : PredatorBaseState
         Debug.Log("Exiting Attack State");
     }
 
-    public override Vector3 GenerateTarget()
+    public override void GenerateTarget()
     {
         Debug.Log("Setting new Attack target " + _player.position);
-        return _player.position;
+        _fishController.SetNewTarget(_player.position);
     }
 
     public override void UpdateState(PredatorStateMachine predator)
@@ -41,9 +43,9 @@ public class PredatorAttackState : PredatorBaseState
 
         // Update nav mesh target at set intervals to prevent performance loss
         _targetTimer += Time.deltaTime;
-        if (_targetTimer >= 1)
+        if (_targetTimer >= 0.5f)
         {
-            predator.FishController.SetNewTarget(GenerateTarget());
+            GenerateTarget();
             _targetTimer = 0;
         }
 

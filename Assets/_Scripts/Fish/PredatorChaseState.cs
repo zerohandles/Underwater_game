@@ -6,12 +6,14 @@ using UnityEngine;
 public class PredatorChaseState : PredatorBaseState
 {
     Transform _player;
+    Fish _fishController;
     float _targetTimer;
 
     public override void EnterState(PredatorStateMachine predator)
     {
         _player = predator.FishController.Player.transform;
-        predator.FishController.SetNewTarget(GenerateTarget());
+        _fishController = predator.FishController;
+        GenerateTarget();
         Debug.Log("Entering Chase State");
     }
 
@@ -21,10 +23,10 @@ public class PredatorChaseState : PredatorBaseState
         Debug.Log("Exiting Chase State");
     }
 
-    public override Vector3 GenerateTarget()
+    public override void GenerateTarget()
     {
         Debug.Log("Setting new Target " + _player.position);
-        return _player.position;
+        _fishController.SetNewTarget(_player.position);
     }
 
     public override void UpdateState(PredatorStateMachine predator)
@@ -34,10 +36,11 @@ public class PredatorChaseState : PredatorBaseState
         if (!predator.IsChasing)
             predator.SwitchStates(predator.WanderState);
 
+        // Update nav agent destination at specific intervals
         _targetTimer += Time.deltaTime;
-        if (_targetTimer >= 1)
+        if (_targetTimer >= 0.5f)
         {
-            predator.FishController.SetNewTarget(GenerateTarget());
+            GenerateTarget();
             _targetTimer = 0;
         }
     }
