@@ -14,11 +14,18 @@ public class Fish : MonoBehaviour
     [SerializeField] LayerMask _groundLayer;
     [SerializeField] Collider _fishCollider;
 
-
-    void Start()
+    void Awake()
     {
         Agent = GetComponent<NavMeshAgent>();
         Player = GameObject.Find("Player").GetComponent<PlayerController>();
+    }
+
+    void OnEnable()
+    {
+        RaycastHit hit;
+        Physics.Raycast(transform.position, Vector3.down, out hit, Mathf.Infinity, _groundLayer);
+        Agent.baseOffset = transform.position.y - hit.point.y;
+        Agent.enabled = true;
     }
 
     void Update()
@@ -28,7 +35,7 @@ public class Fish : MonoBehaviour
         RaycastHit hit;
         Physics.Raycast(transform.position, Vector3.down, out hit, Mathf.Infinity, _groundLayer);
         if (Mathf.Abs(Target.y - transform.position.y) > 1)
-            SetDepth(hit);
+            ChangeDepth(hit);
         else
             MaintainDepth(hit);
     }
@@ -37,14 +44,14 @@ public class Fish : MonoBehaviour
     /// Move the NavMeshAgent's BassOffset towards the target's y position
     /// </summary>
     /// <param name="hit"></param>
-    public void SetDepth(RaycastHit hit)
+    public void ChangeDepth(RaycastHit hit)
     {
         float direction = Mathf.Sign(Target.y - transform.position.y);
         float distanceToSeaFloor = Target.y - hit.point.y;
         float minDepth = _fishCollider.bounds.size.y;
 
         // Prevent fish from swimming through the ground
-        Agent.baseOffset = distanceToSeaFloor > minDepth ? Agent.baseOffset += (direction * 0.05f) : minDepth;
+        Agent.baseOffset = distanceToSeaFloor > minDepth ? Agent.baseOffset += direction * 0.05f : minDepth;
     }
 
     /// <summary>
