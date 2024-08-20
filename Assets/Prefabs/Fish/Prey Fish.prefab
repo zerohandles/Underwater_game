@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 8021897514263040398}
   - component: {fileID: 2613189222300823054}
   - component: {fileID: 6426504713287734840}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Wander Trigger
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -78,7 +78,7 @@ GameObject:
   - component: {fileID: 552406001593541211}
   - component: {fileID: 3984824651112614146}
   - component: {fileID: 3481063280009872288}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Capsule
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -184,7 +184,7 @@ GameObject:
   - component: {fileID: 846880630758869288}
   - component: {fileID: 1687924192265166237}
   - component: {fileID: 7619477736555747231}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Flee Trigger
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -251,7 +251,7 @@ GameObject:
   - component: {fileID: 1703374820383167578}
   - component: {fileID: 4881939407339151148}
   - component: {fileID: 1080216379338421145}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Prey Fish
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -292,6 +292,8 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 128
   _fishCollider: {fileID: 3481063280009872288}
+  _targetRadius: 200
+  _waterHeight: 95
 --- !u!114 &4881939407339151148
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -314,17 +316,17 @@ NavMeshAgent:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5375293604706347434}
   m_Enabled: 0
-  m_AgentTypeID: 0
-  m_Radius: 1
+  m_AgentTypeID: -334000983
+  m_Radius: 2
   m_Speed: 15
-  m_Acceleration: 8
+  m_Acceleration: 12
   avoidancePriority: 50
-  m_AngularSpeed: 120
-  m_StoppingDistance: 0
+  m_AngularSpeed: 360
+  m_StoppingDistance: 5
   m_AutoTraverseOffMeshLink: 1
   m_AutoBraking: 1
   m_AutoRepath: 1
   m_Height: 2
   m_BaseOffset: 10
-  m_WalkableMask: 4294967295
+  m_WalkableMask: 5
   m_ObstacleAvoidanceType: 4

@@ -16,11 +16,14 @@ public class Fish : MonoBehaviour
     [SerializeField] float _targetRadius;
     [SerializeField] float _waterHeight = 95;
 
-    float _stuckTimer;
+    float _stuckTimer = 3;
     Vector3 _lastPosition;
+    private bool _isStuck;
+    private Rigidbody _rb;
 
     void OnEnable()
     {
+        _rb = GetComponent<Rigidbody>();
         Agent = GetComponent<NavMeshAgent>();
         Player = GameObject.Find("Player").GetComponent<PlayerController>();
 
@@ -32,11 +35,11 @@ public class Fish : MonoBehaviour
 
     void Update()
     {
-/*        _stuckTimer += Time.deltaTime;
-        if (Vector3.Distance(_lastPosition, transform.position) > 1)
-            _stuckTimer = 0;
-        if (_stuckTimer > 3)
-            SetRandomTarget();*/
+        if (!_isStuck && _rb.velocity.x <= 0.1f && _rb.velocity.z <= 0.1f)
+        {
+            Debug.Log(name + " Is Stuck");
+            StartCoroutine(StuckTimer(_lastPosition));
+        }
 
         // Check if destination has been reached, ignoring depth.
         IsTargetReached = Vector3.Distance(transform.position, new Vector3(Target.x, transform.position.y, Target.z)) < 5f;
@@ -52,6 +55,19 @@ public class Fish : MonoBehaviour
         _lastPosition = transform.position;
     }
 
+    private IEnumerator StuckTimer(Vector3 stuckPos)
+    {
+        Debug.Log(name + " is starting stuck routine " + Time.time);
+        if (_isStuck)
+            yield return null;
+
+        _isStuck = true;
+        yield return new WaitForSeconds(_stuckTimer);
+        if (Vector3.Distance(transform.position, stuckPos) < 1)
+            SetRandomTarget();
+        _isStuck = false;
+    }
+
     /// <summary>
     /// Move the NavMeshAgent's BassOffset towards the target's y position
     /// </summary>
@@ -63,7 +79,7 @@ public class Fish : MonoBehaviour
         float minDepth = _fishCollider.bounds.size.y;
 
         // Prevent fish from swimming through the ground
-        Agent.baseOffset = distanceToSeaFloor > minDepth ? Agent.baseOffset += direction * 0.05f : minDepth;
+        Agent.baseOffset = distanceToSeaFloor > minDepth ? Agent.baseOffset += direction * 0.2f : minDepth;
     }
 
     /// <summary>
