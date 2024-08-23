@@ -8,7 +8,7 @@ public class PredatorWanderState : PredatorBaseState
     public override void EnterState(PredatorStateMachine predator)
     {
         _fishController = predator.FishController;
-        _fishController.SetRandomTarget();
+        GenerateTarget();
         Debug.Log("Entering Wander State");
     }
 

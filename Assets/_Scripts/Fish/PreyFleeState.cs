@@ -13,7 +13,7 @@ public class PreyFleeState : PreyBaseState
         _fishController = prey.FishController;
         prey.IsWandering = false;
         GenerateTarget();
-        Debug.Log(prey.FishController.Target);
+        Debug.Log("Entering Flee State");
     }
 
     public override void ExitState(PreyStateManager prey)

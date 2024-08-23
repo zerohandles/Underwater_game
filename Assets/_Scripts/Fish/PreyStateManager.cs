@@ -14,12 +14,16 @@ public class PreyStateManager : MonoBehaviour
     public PreyWanderState WanderState = new PreyWanderState();
     public PreyFleeState FleeState = new PreyFleeState();
 
-    void Start()
+
+    private void OnEnable()
     {
-        FishController = GetComponent<Fish>();
         IsWandering = true;
         _currentState = WanderState;
         _currentState.EnterState(this);
+    }
+    void Awake()
+    {
+        FishController = GetComponent<Fish>();
     }
 
     void Update()

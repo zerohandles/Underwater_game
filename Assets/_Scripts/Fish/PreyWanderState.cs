@@ -11,7 +11,6 @@ public class PreyWanderState : PreyBaseState
         // Set wander movement speed?
         _fishController = prey.FishController;
         GenerateTarget();
-        Debug.Log(prey.FishController.Target);
     }
 
     public override void ExitState(PreyStateManager prey)
@@ -19,10 +18,7 @@ public class PreyWanderState : PreyBaseState
         // increase speed for flee state?
     }
 
-    public override void GenerateTarget()
-    {
-        _fishController.SetRandomTarget(); 
-    }
+    public override void GenerateTarget() => _fishController.SetRandomTarget();
 
     public override void UpdateState(PreyStateManager prey)
     {

@@ -15,15 +15,18 @@ public class PredatorStateMachine : MonoBehaviour
     public PredatorChaseState ChaseState = new PredatorChaseState();
     public PredatorWanderState WanderState = new PredatorWanderState();
 
-    // Start is called before the first frame update
-    void Start()
+    void OnEnable()
     {
-        FishController = GetComponent<Fish>();
         _currentState = WanderState;
         _currentState.EnterState(this);
     }
 
-    // Update is called once per frame
+    void Awake()
+    {
+        FishController = GetComponent<Fish>();
+    }
+
+
     void Update()
     {
         _currentState.UpdateState(this);
