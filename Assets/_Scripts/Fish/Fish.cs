@@ -27,17 +27,15 @@ public class Fish : MonoBehaviour
     Vector3 _lastPosition;
     Vector3 _currentPosition;
 
-    [Header("Movement")]
+    [Header("Stats")]
     [SerializeField] float _wanderSpeed;
     [SerializeField] float _fleeSpeed;
     [SerializeField] float _chaseSpeed;
 
-    Rigidbody _rb;
 
     private void Awake()
     {
         Agent = GetComponent<NavMeshAgent>();
-        _rb = GetComponent<Rigidbody>();
         _surface = GameObject.Find(_navMeshName).GetComponent<NavMeshSurface>();
         _data = _surface.navMeshData;
         Player = GameObject.Find("Player").GetComponent<PlayerController>();
@@ -51,7 +49,6 @@ public class Fish : MonoBehaviour
         // Set starting nav mesh offset so fish can spawn at any depth and remain on the nav mesh
         Physics.Raycast(transform.position, Vector3.down, out RaycastHit hit, Mathf.Infinity, _NavMeshLayer);
         Agent.baseOffset = transform.position.y - hit.point.y;
-        Debug.Log(hit.point.y);
         Agent.enabled = true;
     }
 
