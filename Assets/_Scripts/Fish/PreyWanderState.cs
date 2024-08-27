@@ -10,6 +10,7 @@ public class PreyWanderState : PreyBaseState
     {
         // Set wander movement speed?
         _fishController = prey.FishController;
+        _fishController.Agent.speed = _fishController.WanderSpeed;
         GenerateTarget();
     }
 

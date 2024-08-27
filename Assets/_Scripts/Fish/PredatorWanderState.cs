@@ -8,6 +8,7 @@ public class PredatorWanderState : PredatorBaseState
     public override void EnterState(PredatorStateMachine predator)
     {
         _fishController = predator.FishController;
+        _fishController.Agent.speed = _fishController.WanderSpeed;
         GenerateTarget();
         Debug.Log("Entering Wander State");
     }

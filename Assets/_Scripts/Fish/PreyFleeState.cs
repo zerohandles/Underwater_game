@@ -11,6 +11,7 @@ public class PreyFleeState : PreyBaseState
         // Set flee speed
         // Set player as target
         _fishController = prey.FishController;
+        _fishController.Agent.speed = _fishController.FleeSpeed;
         prey.IsWandering = false;
         GenerateTarget();
         Debug.Log("Entering Flee State");

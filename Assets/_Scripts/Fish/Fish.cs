@@ -10,6 +10,9 @@ public class Fish : MonoBehaviour
     public PlayerController Player { get; private set; }
     public Vector3 Target { get; private set; }
     public bool IsTargetReached { get; private set; }
+    public float ChaseSpeed => _chaseSpeed;
+    public float WanderSpeed => _wanderSpeed;
+    public float FleeSpeed => _fleeSpeed;
 
     [Header("AI Navigation")]
     [SerializeField] Collider _fishCollider;
@@ -27,7 +30,7 @@ public class Fish : MonoBehaviour
     Vector3 _lastPosition;
     Vector3 _currentPosition;
 
-    [Header("Stats")]
+    [Header("Movement Speeds")]
     [SerializeField] float _wanderSpeed;
     [SerializeField] float _fleeSpeed;
     [SerializeField] float _chaseSpeed;

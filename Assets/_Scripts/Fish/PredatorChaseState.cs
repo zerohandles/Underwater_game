@@ -13,6 +13,7 @@ public class PredatorChaseState : PredatorBaseState
     {
         _player = predator.FishController.Player.transform;
         _fishController = predator.FishController;
+        _fishController.Agent.speed = _fishController.ChaseSpeed;
         GenerateTarget();
         Debug.Log("Entering Chase State");
     }

@@ -14,6 +14,7 @@ public class PredatorAttackState : PredatorBaseState
     public override void EnterState(PredatorStateMachine predator)
     {
         _fishController = predator.FishController;
+        _fishController.Agent.speed = _fishController.ChaseSpeed;
         _attackTimer = _attackDelay;
         _player = predator.FishController.Player.transform;
         _playerStats = _player.GetComponent<PlayerStats>();
