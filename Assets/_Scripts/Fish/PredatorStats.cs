@@ -5,11 +5,17 @@ using UnityEngine;
 public class PredatorStats : MonoBehaviour, IDamageable
 {
     [SerializeField] float _health = 1f;
+    [SerializeField] float _damage = 1;
 
     public float Health 
     { 
         get { return _health; } 
         private set { _health -= value; }
+    }
+
+    public float Damage
+    {
+        get { return _damage; }
     }
 
     public void TakeDamage(float amount)

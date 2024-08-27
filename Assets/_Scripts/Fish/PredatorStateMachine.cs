@@ -10,6 +10,7 @@ public class PredatorStateMachine : MonoBehaviour
     public bool IsChasing;
 
     public Fish FishController { get; private set; }
+    public PredatorStats Stats { get; private set; }
 
     public PredatorAttackState AttackState = new PredatorAttackState();
     public PredatorChaseState ChaseState = new PredatorChaseState();
@@ -24,6 +25,7 @@ public class PredatorStateMachine : MonoBehaviour
     void Awake()
     {
         FishController = GetComponent<Fish>();
+        Stats = GetComponent<PredatorStats>();
     }
 
 

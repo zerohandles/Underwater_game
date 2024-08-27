@@ -8,13 +8,15 @@ public class PredatorAttackState : PredatorBaseState
     float _attackTimer;
     float _targetTimer;
     Transform _player;
+    PlayerStats _playerStats;
     Fish _fishController;
 
     public override void EnterState(PredatorStateMachine predator)
     {
         _fishController = predator.FishController;
-        _attackTimer = 0;
+        _attackTimer = _attackDelay;
         _player = predator.FishController.Player.transform;
+        _playerStats = _player.GetComponent<PlayerStats>();
         Debug.Log("Entering Attack State");
     }
 
@@ -52,7 +54,8 @@ public class PredatorAttackState : PredatorBaseState
         _attackTimer += Time.deltaTime;
         if (_attackTimer >= _attackDelay)
         {
-            // Attack Code
+            _attackTimer = 0;
+            _playerStats.TakeDamage(predator.Stats.Damage);
             Debug.Log(predator.name + "Attacks");
         }
     }

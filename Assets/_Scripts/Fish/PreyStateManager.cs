@@ -10,6 +10,7 @@ public class PreyStateManager : MonoBehaviour
     public bool IsFleeing;
 
     public Fish FishController { get; private set; }
+    public PreyStats Stats { get; private set; }
 
     public PreyWanderState WanderState = new PreyWanderState();
     public PreyFleeState FleeState = new PreyFleeState();
@@ -24,6 +25,7 @@ public class PreyStateManager : MonoBehaviour
     void Awake()
     {
         FishController = GetComponent<Fish>();
+        Stats = GetComponent<PreyStats>();
     }
 
     void Update()
